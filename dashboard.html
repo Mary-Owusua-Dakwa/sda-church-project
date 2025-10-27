@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Admin Dashboard</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header class="app-header">
+<h1>Dashboard</h1>
+<button id="logoutBtn">Logout</button>
+</header>
+<main class="container">
+<div class="grid">
+<a class="card" href="members.html">Members</a>
+<a class="card" href="events.html">Events</a>
+<a class="card" href="finance.html">Finance</a>
+</div>
+</main>
+
+
+<script type="module">
+import { auth } from './assets/js/firebase.js';
+import { signOut } from 'https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js';
+
+
+document.getElementById('logoutBtn').addEventListener('click', async ()=>{
+await signOut(auth);
+window.location.href = 'login.html';
+});
+
+
+// optional: protect page
+auth.onAuthStateChanged(user=>{
+if(!user) window.location.href = 'login.html';
+});
+</script>
+</body>
+</html>
